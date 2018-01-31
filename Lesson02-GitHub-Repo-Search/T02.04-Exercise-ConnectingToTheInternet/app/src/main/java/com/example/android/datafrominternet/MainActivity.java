@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
+import java.io.IOException;
 
 import com.example.android.datafrominternet.utilities.NetworkUtils;
 
@@ -55,8 +56,16 @@ public class MainActivity extends AppCompatActivity {
         String githubQuery = mSearchBoxEditText.getText().toString();
         URL githubSearchUrl = NetworkUtils.buildUrl(githubQuery);
         mUrlDisplayTextView.setText(githubSearchUrl.toString());
-        // TODO (2) Call getResponseFromHttpUrl and display the results in mSearchResultsTextView
-        // TODO (3) Surround the call to getResponseFromHttpUrl with a try / catch block to catch an IOException
+        // COMPLETED (2) Call getResponseFromHttpUrl and display the results in mSearchResultsTextView
+        // COMPLETED (3) Surround the call to getResponseFromHttpUrl with a try / catch block to catch an IOException
+        String githubSearchResults = null;
+        try {
+            githubSearchResults = NetworkUtils.getResponseFromHttpUrl(githubSearchUrl);
+            mSearchResultsTextView.setText(githubSearchResults);
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
